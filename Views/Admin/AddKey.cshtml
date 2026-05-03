@@ -1,0 +1,50 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Tạo Key cho Bác sĩ";
+}
+
+<h2 class="mb-4">Tạo Key cho Bác sĩ</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="AddKey" method="post">
+            <div class="row g-3">
+                <!-- Chọn Bác sĩ -->
+                <div class="col-md-6">
+                    <label class="form-label">Chọn Bác sĩ chưa có key</label>
+                    <select name="maBacSi" class="form-select" required>
+                        <option value="">-- Chọn bác sĩ --</option>
+                        @foreach (var bs in ViewBag.UsernameList)
+                        {
+                            <option value="@bs">@bs</option>
+                        }
+                    </select>
+                </div>
+
+                <!-- Nhập Secret Key -->
+                <div class="col-md-6">
+                    <label class="form-label">Secret Key (giá trị khóa)</label>
+                    <input type="text" name="secretKey" class="form-control" 
+                           placeholder="Nhập giá trị secret key..." required />
+                    <div class="form-text">Giá trị này sẽ được lưu vào SQL Server và Azure Key Vault.</div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-key-fill"></i> Tạo Key
+                </button>
+                <a asp-action="QuanLyQuyen" class="btn btn-secondary ms-2">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>

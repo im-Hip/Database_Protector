@@ -1,0 +1,39 @@
+@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Lịch làm việc của tôi";
+    var ngay = ViewBag.NgayHienTai;
+}
+
+<h2>Lịch làm việc ngày @ngay</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Phòng khám</th>
+            <th>Giờ bắt đầu</th>
+            <th>Giờ kết thúc</th>
+            <th>Ghi chú</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.tenPhongKham (@item.maPhongKham)</td>
+                <td>@item.gioBatDau</td>
+                <td>@item.gioKetThuc</td>
+                <td>@item.ghiChu</td>
+                <td>
+                    <a asp-action="GoiBenhNhan" 
+                       asp-route-maPhongKham="@item.maPhongKham" 
+                       class="btn btn-success btn-sm">
+                        <i class="bi bi-person-check"></i> Gọi bệnh nhân
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">← Quay lại hôm nay</a>

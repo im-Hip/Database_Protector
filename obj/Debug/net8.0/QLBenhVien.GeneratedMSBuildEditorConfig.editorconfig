@@ -1,0 +1,103 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = QLBenhVien
+build_property.RootNamespace = QLBenhVien
+build_property.ProjectDir = D:\BMCSDL_DOAN\QLBenhVien\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\BMCSDL_DOAN\QLBenhVien
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Account/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Admin/AddKey.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWRkS2V5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Admin/QuanLyQuyen.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUXVhbkx5UXV5ZW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/GoiBenhNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFjU2lcR29pQmVuaE5oYW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFjU2lcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/DieuPhoi/DanhSachBenhNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldVBob2lcRGFuaFNhY2hCZW5oTmhhbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/DieuPhoi/DieuPhoi.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldVBob2lcRGlldVBob2kuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/DieuPhoi/SuaBenhNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldVBob2lcU3VhQmVuaE5oYW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/DieuPhoi/ThemBenhNhan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGlldVBob2lcVGhlbUJlbmhOaGFuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Shared/_SidebarTaiVu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaWRlYmFyVGFpVnUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Shared/_SidebarTiepTan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9TaWRlYmFyVGllcFRhbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/TaiVu/DanhSachChoThuTien.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFpVnVcRGFuaFNhY2hDaG9UaHVUaWVuLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/TaiVu/XacNhanThanhToan.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFpVnVcWGFjTmhhblRoYW5oVG9hbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-e0gue5bwle

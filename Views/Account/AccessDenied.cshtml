@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Truy cập bị từ chối";
+    Layout = "_Layout";
+}
+
+<div class="alert alert-danger">
+    <h3>@ViewBag.Message</h3>
+    <a href="/Account/Logout" class="btn btn-primary">Đăng xuất và thử lại</a>
+</div>

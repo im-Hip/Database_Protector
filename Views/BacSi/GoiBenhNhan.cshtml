@@ -1,0 +1,48 @@
+@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Gọi bệnh nhân - Phòng " + ViewBag.MaPhongKham;
+}
+
+<h3>Bệnh nhân đang chờ khám - Phòng @ViewBag.MaPhongKham</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Mã BN</th>
+            <th>Họ tên</th>
+            <th>Giới tính</th>
+            <th>Năm sinh</th>
+            <th>SĐT</th>
+            <th>Thời gian</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bn in Model)
+        {
+            <tr>
+                <td>@bn.maBenhNhan</td>
+                <td><strong>@bn.hoTen</strong></td>
+                <td>@bn.gioiTinh</td>
+                <td>@bn.namSinh</td>
+                <td>@bn.soDienThoai</td>
+                <td>@bn.ngayKham.ToString("HH:mm dd/MM/yyyy")</td>
+                <td>
+                    <form asp-action="GoiKham" method="post" class="d-inline">
+                        <input type="hidden" name="maKhamBenh" value="@bn.maKhamBenh" />
+                        <input type="hidden" name="maBenhNhan" value="@bn.maBenhNhan" />
+                        <input type="hidden" name="maPhongKham" value="@ViewBag.MaPhongKham" />
+                        <button type="submit" class="btn btn-primary btn-sm">Gọi khám</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">← Quay lại lịch làm việc</a>

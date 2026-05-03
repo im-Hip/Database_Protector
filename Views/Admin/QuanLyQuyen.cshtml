@@ -1,0 +1,60 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Quản lý tài khoản";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Quản lý tài khoản hệ thống</h2>
+    <a asp-action="AddKey" class="btn btn-success">
+        <i class="bi bi-key-fill"></i> Tạo Key cho Bác sĩ
+    </a>
+</div>
+
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>Username</th>
+            <th>Mã nhân viên</th>
+            <th>TypeID (Role)</th>
+            <th>Trạng thái</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var acc in (IEnumerable<dynamic>)ViewBag.Accounts)
+        {
+            <tr>
+                <form asp-action="UpdateAccount" method="post">
+                    <td>@acc.username</td>
+                    <td>@acc.maNhanVien</td>
+                    <td>
+                        <select name="newTypeID" class="form-select form-select-sm">
+                            <option value="1" selected="@(acc.typeID == "1")">1 - Bác sĩ</option>
+                            <option value="2" selected="@(acc.typeID == "2")">2 - Tiếp tân</option>
+                            <option value="3" selected="@(acc.typeID == "3")">3 - Tài vụ</option>
+                            <option value="4" selected="@(acc.typeID == "4")">4 - Quản lý nhân sự</option>
+                            <option value="5" selected="@(acc.typeID == "5")">5 - Quản lý tài vụ</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div class="form-check form-switch">
+                            <input type="checkbox" name="newIsActive" class="form-check-input" 
+                                   value="true" @(acc.IsActive == true ? "checked" : "") />
+                        </div>
+                    </td>
+                    <td>@(acc.createdDate?.ToString("dd/MM/yyyy HH:mm"))</td>
+                    <td>
+                        <input type="hidden" name="targetUsername" value="@acc.username" />
+                        <button type="submit" class="btn btn-primary btn-sm">Cập nhật</button>
+                    </td>
+                </form>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}

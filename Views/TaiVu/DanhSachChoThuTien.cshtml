@@ -1,0 +1,53 @@
+@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Danh sách chờ thu tiền";
+}
+
+<h2 class="mb-4">Danh sách bệnh nhân chờ thu tiền</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã BN</th>
+            <th>Họ tên</th>
+            <th>Mã khám bệnh</th>
+            <th>Ngày khám</th>
+            <th>Số dịch vụ</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.maBenhNhan</td>
+                <td>@item.hoTen</td>
+                <td>@item.maKhamBenh</td>
+                <td>@item.ngayKham?.ToString("dd/MM/yyyy")</td>
+                <td>@item.SoDichVuChuaThanhToan</td>
+                <td>
+                    <form asp-action="TaoHoaDon" method="post" style="display:inline; margin-right: 5px;">
+                        <input type="hidden" name="maKhamBenh" value="@item.maKhamBenh" />
+                        <button type="submit" class="btn btn-success btn-sm">Tạo hóa đơn</button>
+                    </form>
+
+                    <a asp-controller="TaiVu" 
+                       asp-action="XacNhanThanhToan" 
+                       asp-route-maKhamBenh="@item.maKhamBenh"
+                       class="btn btn-primary btn-sm">
+                        Xác nhận thanh toán
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

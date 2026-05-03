@@ -1,0 +1,52 @@
+@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Xác nhận thanh toán";
+    var first = Model.FirstOrDefault();
+}
+
+<h3>Xác nhận thanh toán - Hóa đơn #@first?.maHoaDon</h3>
+<p><strong>Bệnh nhân:</strong> @first?.TenBenhNhan | <strong>Ngày:</strong> @first?.ngayLap</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>Dịch vụ</th>
+            <th class="text-end">Đơn giá (VNĐ)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.tenDichVu</td>
+                <td class="text-end">@item.DonGiaGiaiMa?.ToString("N0")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-action="XacNhanThanhToan" method="post">
+    <input type="hidden" name="maHoaDon" value="@first?.maHoaDon" />
+
+    <div class="row mt-4">
+        <div class="col-md-5">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Số tiền nhận từ khách (VNĐ)</label>
+                <input type="number" name="soTienNhan" class="form-control form-control-lg" step="1000" required>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="mb-3">
+                <label class="form-label fw-bold">Tiền thối lại (VNĐ)</label>
+                <input type="number" name="soTienThoi" class="form-control form-control-lg" step="1000" required>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="bi bi-check-circle-fill"></i> Thanh toán
+        </button>
+        <a asp-action="DanhSachChoThuTien" class="btn btn-secondary btn-lg">Hủy</a>
+    </div>
+</form>

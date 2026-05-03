@@ -1,0 +1,58 @@
+@model IEnumerable<QLBenhVien.Models.BenhNhan>
+
+@{
+    ViewData["Title"] = "Danh sách bệnh nhân - Tiếp tân";
+    Layout = "_Layout";
+}
+
+<h2 class="mb-4">Danh sách bệnh nhân</h2>
+
+<!-- Form tìm kiếm -->
+<form asp-action="DanhSachBenhNhan" method="get" class="mb-3">
+    <div class="input-group" style="width: 400px;">
+        <input type="text" name="searchTerm" class="form-control" 
+               placeholder="Tìm theo họ tên hoặc số điện thoại..." 
+               value="@ViewBag.SearchTerm" />
+        <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+        <a asp-action="DanhSachBenhNhan" class="btn btn-secondary">Xóa tìm kiếm</a>
+    </div>
+</form>
+
+<a asp-action="ThemBenhNhan" class="btn btn-primary mb-3">Thêm bệnh nhân mới</a>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+<table class="table table-bordered table-hover">
+    <thead class="table-dark">
+        <tr>
+            <th>Mã BN</th>
+            <th>Họ tên</th>
+            <th>Giới tính</th>
+            <th>Năm sinh</th>
+            <th>Địa chỉ</th>
+            <th>Điện thoại</th>
+            <th>Ngày tạo</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var bn in Model)
+        {
+            <tr>
+                <td>@bn.maBenhNhan</td>
+                <td>@bn.hoTen</td>
+                <td>@bn.gioiTinh</td>
+                <td>@bn.namSinh</td>
+                <td>@bn.diaChi</td>
+                <td>@bn.soDienThoai</td>
+                <td>@bn.ngayTao?.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a asp-action="SuaBenhNhan" asp-route-id="@bn.maBenhNhan" class="btn btn-warning btn-sm">Sửa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

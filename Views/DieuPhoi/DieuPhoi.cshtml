@@ -1,0 +1,51 @@
+<h2 class="mb-4">Điều phối bệnh nhân</h2>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="DieuPhoi" method="post">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Bệnh nhân</label>
+                    <select name="maBenhNhan" class="form-select" required>
+                        <option value="">-- Chọn bệnh nhân --</option>
+                        @foreach (var bn in ViewBag.BenhNhanList)
+                        {
+                            <option value="@bn.maBenhNhan">@bn.TenHienThi</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Phòng khám</label>
+                    <select name="maPhongKham" class="form-select" required>
+                        <option value="">-- Chọn phòng khám --</option>
+                        @foreach (var pk in ViewBag.PhongKhamList)
+                        {
+                            <option value="@pk.maPhongKham">@pk.tenPhongKham</option>
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="alert alert-info small mb-3">
+                <i class="bi bi-info-circle"></i> 
+                <strong>Tự động gán bác sĩ:</strong> Hệ thống sẽ tự động gán <strong>maNV (bác sĩ)</strong> từ bảng <code>LICH_LAMVIEC</code> 
+                cho phòng khám đã chọn trong ngày hôm nay (ưu tiên ca sớm nhất). 
+                Nếu không có lịch làm việc, maBacSi sẽ để trống (có thể cập nhật sau).
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                <i class="bi bi-calendar-check"></i> Tạo phiên khám &amp; Điều phối
+            </button>
+        </form>
+    </div>
+</div>
