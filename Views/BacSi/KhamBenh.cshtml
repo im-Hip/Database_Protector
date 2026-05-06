@@ -1,0 +1,91 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Thông tin bệnh nhân";
+    var maPhong = ViewBag.MaPhongKham?.ToString() ?? "";
+    bool isMainRoom = maPhong == "PK01" || maPhong == "PK02" || maPhong == "PK03";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-sm border-0">
+        <div class="card-header bg-light py-3">
+            <h4 class="mb-0"><strong>Thông tin bệnh nhân</strong></h4>
+        </div>
+
+        <div class="card-body">
+            <!-- Thông tin cơ bản (giữ nguyên) -->
+            <div class="row g-3 mb-4">
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Mã BN</label>
+                    <input type="text" class="form-control bg-light" value="@Model.maBenhNhan" readonly />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Mã khám</label>
+                    <input type="text" class="form-control bg-light" value="@Model.maKhamBenh" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Họ tên</label>
+                    <input type="text" class="form-control bg-light" value="@Model.hoTen" readonly />
+                </div>
+
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Giới tính</label>
+                    <input type="text" class="form-control bg-light" value="@Model.gioiTinh" readonly />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Năm sinh</label>
+                    <input type="text" class="form-control bg-light" value="@Model.namSinh" readonly />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Chiều cao (m)</label>
+                    <input type="text" class="form-control bg-light" value="@Model.chieuCao" readonly />
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label fw-bold">Cân nặng (kg)</label>
+                    <input type="text" class="form-control bg-light" value="@Model.canNang" readonly />
+                </div>
+            </div>
+
+            @if (isMainRoom)
+            {
+                <!-- Phòng PK01, PK02, PK03: Hiển thị đầy đủ -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Triệu chứng</label>
+                    <textarea class="form-control" rows="5" placeholder="Nhập triệu chứng...">@Model.trieuChung</textarea>
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Chẩn đoán cuối cùng</label>
+                    <textarea class="form-control" rows="5" placeholder="Nhập chẩn đoán cuối cùng...">@Model.chanDoanCuoiCung</textarea>
+                </div>
+
+                <!-- Nút chức năng cho phòng chính -->
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                    <button class="btn btn-primary px-4">Khám bệnh</button>
+                    <a asp-action="ChonXetNghiem" 
+                       asp-route-maKhamBenh="@Model.maKhamBenh"
+                       asp-route-maBenhNhan="@Model.maBenhNhan"
+                        asp-route-maPhongKham="@ViewBag.MaPhongKham"
+                       class="btn btn-warning px-4">
+                        Cho đi xét nghiệm
+                    </a>
+                    <button class="btn btn-success px-4">Kê toa thuốc</button>
+                    <button class="btn btn-info px-4">Lấy bệnh nhân kế</button>
+                </div>
+            }
+            else
+            {
+                <!-- Phòng khác: Chỉ hiện Ghi chú khám -->
+                <div class="mb-4">
+                    <label class="form-label fw-bold">Ghi chú khám</label>
+                    <textarea class="form-control" rows="6" placeholder="Nhập ghi chú khám...">@Model.ghiChuBacSiKham</textarea>
+                </div>
+            }
+        </div>
+
+        <!-- Nút dưới cùng (luôn hiển thị) -->
+        <div class="card-footer d-flex justify-content-center gap-3 py-3">
+            <button class="btn btn-success px-5">Xác nhận</button>
+            <button class="btn btn-danger px-5">Hủy</button>
+        </div>
+    </div>
+</div>

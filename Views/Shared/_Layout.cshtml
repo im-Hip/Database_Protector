@@ -34,10 +34,22 @@
     </header>
 
     <div class="d-flex">
+        <!-- Sidebar cho Bác sĩ -->
+        @if (User.HasClaim("TypeID", "1"))
+        {
+            @await Html.PartialAsync("_SidebarBacSi")
+        }
+
         <!-- Sidebar cho Tiếp tân / Điều phối -->
         @if (User.HasClaim("TypeID", "2"))
         {
             @await Html.PartialAsync("_SidebarTiepTan")
+        }
+
+        <!-- Sidebar cho Tài vụ -->
+        @if (User.HasClaim("TypeID", "3"))
+        {
+            @await Html.PartialAsync("_SidebarTaiVu")
         }
 
         <!-- Nội dung chính -->

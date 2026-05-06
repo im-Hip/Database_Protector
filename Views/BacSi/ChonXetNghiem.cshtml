@@ -1,0 +1,26 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Chọn xét nghiệm";
+}
+
+<div class="container mt-4">
+    <h4>Chọn xét nghiệm cho bệnh nhân</h4>
+
+    <form asp-action="LuuXetNghiem" method="post">
+        <input type="hidden" name="maKhamBenh" value="@ViewBag.MaKhamBenh" />
+        <input type="hidden" name="maPhongKhamGoc" value="@ViewBag.MaPhongKham" />
+
+        @foreach (var phong in ViewBag.PhongList)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" 
+                       name="maPhongKham" value="@phong.maPhongKham" />
+                <label class="form-check-label">
+                    @phong.tenPhongKham (@phong.maPhongKham)
+                </label>
+            </div>
+        }
+
+        <button type="submit" class="btn btn-success mt-3">Gửi yêu cầu xét nghiệm</button>
+    </form>
+</div>

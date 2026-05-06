@@ -89,3 +89,4 @@ D:\BMCSDL_DOAN\QLBenhVien\obj\Debug\net8.0\refint\QLBenhVien.dll
 D:\BMCSDL_DOAN\QLBenhVien\obj\Debug\net8.0\QLBenhVien.pdb
 D:\BMCSDL_DOAN\QLBenhVien\obj\Debug\net8.0\QLBenhVien.genruntimeconfig.cache
 D:\BMCSDL_DOAN\QLBenhVien\obj\Debug\net8.0\ref\QLBenhVien.dll
+D:\BMCSDL_DOAN\QLBenhVien\obj\Debug\net8.0\QLBenhVien.sourcelink.json

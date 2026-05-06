@@ -41,37 +41,87 @@ namespace QLBenhVien.Controllers
         {
             if (string.IsNullOrEmpty(maPhongKham))
                 return RedirectToAction("Index");
-
+        
             using var connection = new SqlConnection(_connStr);
-
+        
             var danhSachBenhNhan = await connection.QueryAsync<dynamic>(
                 "sp_LayBNDauTienCuaPhong",
                 new { maPhongKham },
                 commandType: CommandType.StoredProcedure);
-
+        
             ViewBag.MaPhongKham = maPhongKham;
             return View(danhSachBenhNhan);
         }
+        
+        public async Task<IActionResult> KhamBenh(int maKhamBenh, string maPhongKham)
+        {
+            using var connection = new SqlConnection(_connStr);
+        
+            var benhNhan = await connection.QueryFirstOrDefaultAsync<dynamic>(
+                "sp_LayThongTinBenhNhan",
+                new { maKhamBenh },
+                commandType: CommandType.StoredProcedure);
+        
+            if (benhNhan == null)
+            {
+                TempData["Error"] = "Không tìm thấy thông tin bệnh nhân.";
+                return RedirectToAction("GoiBenhNhan", new { maPhongKham });
+            }
+        
+            // Truyền maPhongKham sang View
+            ViewBag.MaPhongKham = maPhongKham;
+        
+            return View(benhNhan);
+        }
 
-        // (Tùy chọn) Action cập nhật tình trạng khi bác sĩ gọi bệnh nhân
-        [HttpPost]
-        public async Task<IActionResult> GoiKham(int maKhamBenh, string maBenhNhan, string maPhongKham)
+        // Hiển thị form chọn phòng xét nghiệm
+        public async Task<IActionResult> ChonXetNghiem(int maKhamBenh, string maBenhNhan, string maPhongKham)
         {
             using var connection = new SqlConnection(_connStr);
 
-            // Cập nhật tình trạng = '2' (đang khám)
-            await connection.ExecuteAsync(@"
-                UPDATE DANHSACH_BENHNHAN 
-                SET tinhTrang = '2' 
-                WHERE maKhamBenh = @maKhamBenh 
-                  AND maBenhNhan = @maBenhNhan 
-                  AND maPhongKham = @maPhongKham",
-                new { maKhamBenh, maBenhNhan, maPhongKham });
+            var phongList = await connection.QueryAsync<dynamic>(
+                "SELECT * FROM vw_PhongXetNghiem ORDER BY tenPhongKham");
 
-            // Có thể thêm logic tạo bản ghi KHAMBENH ở đây nếu cần
+            ViewBag.PhongList = phongList;
+            ViewBag.MaKhamBenh = maKhamBenh;
+            ViewBag.MaBenhNhan = maBenhNhan;
+            ViewBag.MaPhongKham = maPhongKham;
 
-            TempData["Success"] = "Đã gọi bệnh nhân vào khám thành công!";
-            return RedirectToAction("GoiBenhNhan", new { maPhongKham });
+            return View();
+        }
+        
+        // Lưu yêu cầu xét nghiệm
+        [HttpPost]
+        public async Task<IActionResult> LuuXetNghiem(int maKhamBenh, List<string> maPhongKham, string maPhongKhamGoc)
+        {
+            if (maPhongKham == null || maPhongKham.Count == 0)
+            {
+                TempData["Error"] = "Bạn chưa chọn phòng nào!";
+                return RedirectToAction("ChonXetNghiem", new { maKhamBenh });
+            }
+        
+            var maBacSiYeuCau = User.FindFirst("MaNhanVien")?.Value;
+        
+            if (string.IsNullOrEmpty(maBacSiYeuCau))
+            {
+                TempData["Error"] = "Không xác định được bác sĩ.";
+                return RedirectToAction("ChonXetNghiem", new { maKhamBenh });
+            }
+        
+            using var connection = new SqlConnection(_connStr);
+        
+            foreach (var phong in maPhongKham)
+            {
+                await connection.ExecuteAsync(
+                    "sp_ThemChiTietKhamBenh_XetNghiem",
+                    new { maKhamBenh, maBacSiYeuCau, maPhongKham = phong },
+                    commandType: CommandType.StoredProcedure);
+            }
+        
+            TempData["Success"] = $"Đã gửi {maPhongKham.Count} yêu cầu xét nghiệm thành công!";
+        
+            // Quay lại trang Gọi bệnh nhân
+            return RedirectToAction("GoiBenhNhan", new { maPhongKham = maPhongKhamGoc });
         }
     }
-}
+}   

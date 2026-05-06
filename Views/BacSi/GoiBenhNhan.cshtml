@@ -3,46 +3,55 @@
     ViewData["Title"] = "Gọi bệnh nhân - Phòng " + ViewBag.MaPhongKham;
 }
 
-<h3>Bệnh nhân đang chờ khám - Phòng @ViewBag.MaPhongKham</h3>
+<h3 class="mb-4">Bệnh nhân đang chờ khám - Phòng @ViewBag.MaPhongKham</h3>
 
 @if (TempData["Success"] != null)
 {
     <div class="alert alert-success">@TempData["Success"]</div>
 }
 
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Mã BN</th>
-            <th>Họ tên</th>
-            <th>Giới tính</th>
-            <th>Năm sinh</th>
-            <th>SĐT</th>
-            <th>Thời gian</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var bn in Model)
-        {
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Hiện tại không có bệnh nhân nào đang chờ.</div>
+}
+else
+{
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
             <tr>
-                <td>@bn.maBenhNhan</td>
-                <td><strong>@bn.hoTen</strong></td>
-                <td>@bn.gioiTinh</td>
-                <td>@bn.namSinh</td>
-                <td>@bn.soDienThoai</td>
-                <td>@bn.ngayKham.ToString("HH:mm dd/MM/yyyy")</td>
-                <td>
-                    <form asp-action="GoiKham" method="post" class="d-inline">
-                        <input type="hidden" name="maKhamBenh" value="@bn.maKhamBenh" />
-                        <input type="hidden" name="maBenhNhan" value="@bn.maBenhNhan" />
-                        <input type="hidden" name="maPhongKham" value="@ViewBag.MaPhongKham" />
-                        <button type="submit" class="btn btn-primary btn-sm">Gọi khám</button>
-                    </form>
-                </td>
+                <th>Mã BN</th>
+                <th>Họ tên</th>
+                <th>Giới tính</th>
+                <th>Năm sinh</th>
+                <th>Số điện thoại</th>
+                <th>Thời gian</th>
+                <th class="text-center">Thao tác</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var bn in Model)
+            {
+                <tr>
+                    <td><strong>@bn.maBenhNhan</strong></td>
+                    <td>@bn.hoTen</td>
+                    <td>@bn.gioiTinh</td>
+                    <td>@bn.namSinh</td>
+                    <td>@bn.soDienThoai</td>
+                    <td>@bn.ngayKham.ToString("HH:mm dd/MM/yyyy")</td>
+                    <td class="text-center">
+                        <!-- Đã đổi thành link chuyển sang trang KhamBenh -->
+                        <a asp-action="KhamBenh" 
+                           asp-route-maBenhNhan="@bn.maBenhNhan"
+                           asp-route-maKhamBenh="@bn.maKhamBenh"
+                           asp-route-maPhongKham="@ViewBag.MaPhongKham"
+                           class="btn btn-primary btn-sm">
+                            Gọi khám
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
 
-<a asp-action="Index" class="btn btn-secondary">← Quay lại lịch làm việc</a>
+<a asp-action="Index" class="btn btn-secondary mt-3">← Quay lại lịch làm việc</a>
