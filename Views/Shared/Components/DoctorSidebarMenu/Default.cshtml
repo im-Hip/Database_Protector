@@ -1,0 +1,11 @@
+@model dynamic
+
+@if (Model.ShowXetNghiemMenu)
+{
+    <li class="nav-item">
+        <a class="nav-link @(ViewContext.RouteData.Values["Action"]?.ToString() == "DanhSachXetNghiem" ? "active" : "")" 
+           asp-controller="BacSi" asp-action="DanhSachXetNghiem">
+            <i class="bi bi-clipboard-data me-2"></i> DS bệnh nhân xét nghiệm
+        </a>
+    </li>
+}

@@ -1,0 +1,99 @@
+@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Chi tiết xét nghiệm - Mã khám " + ViewBag.MaKhamBenh;
+}
+
+<h3 class="mb-4">Chi tiết xét nghiệm - Mã khám bệnh: <strong>@ViewBag.MaKhamBenh</strong></h3>
+
+<!-- FORM CẬP NHẬT THÔNG TIN KHÁM -->
+<form asp-action="CapNhatChanDoan" method="post">
+    <input type="hidden" name="maKhamBenh" value="@ViewBag.MaKhamBenh" />
+
+    <div class="card mb-4">
+        <div class="card-header bg-light">
+            <strong>Thông tin khám</strong>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <!-- Triệu chứng -->
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Triệu chứng</label>
+                    <textarea name="trieuChung" class="form-control" rows="3">@ViewBag.TrieuChung</textarea>
+                </div>
+
+                <!-- Chẩn đoán cuối cùng -->
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Chẩn đoán cuối cùng</label>
+                    <textarea name="chanDoanCuoiCung" class="form-control" rows="3">@ViewBag.ChanDoanCuoiCung</textarea>
+                </div>
+
+                <!-- Ngày tái khám (MỚI) -->
+                <div class="col-md-4 mt-3">
+                    <label class="form-label fw-bold">Ngày tái khám</label>
+                    <input type="date" name="ngayTaiKham" class="form-control" 
+                           value="@(ViewBag.NgayTaiKham != null ? ((DateTime)ViewBag.NgayTaiKham).ToString("yyyy-MM-dd") : "")" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NÚT XÁC NHẬN -->
+    <div class="mb-4">
+        <button type="submit" class="btn btn-primary px-4">
+            <i class="bi bi-check-circle"></i> Xác nhận cập nhật
+        </button>
+    </div>
+</form>
+
+<!-- DANH SÁCH XÉT NGHIỆM -->
+<table class="table table-bordered table-hover">
+    <thead class="table-light">
+        <tr>
+            <th>Thời gian</th>
+            <th>Mã dịch vụ</th>
+            <th>Bác sĩ khám</th>
+            <th>Ghi chú đã giải mã</th>
+            <th>Trạng thái</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ct in Model)
+        {
+            <tr>
+                <td>@ct.thoiGianKham.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@ct.maDichVu</td>
+                <td>@ct.maBacSiKham</td>
+                <td>
+                    <strong>Ghi chú Khám:</strong><br>
+                    @if (ct.GhiChuGiaiMa != null)
+                    {
+                        <textarea class="form-control" rows="3" readonly>@ct.GhiChuGiaiMa</textarea>
+                    }
+                    else
+                    {
+                        <span class="text-danger"><strong>Không có ghi chú</strong></span>
+                    }
+                </td>
+                <td>
+                    @if (ct.TrangThai == "2")
+                    {
+                        <span class="badge bg-success">Hoàn thành</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<!-- NÚT CHỨC NĂNG -->
+<div class="d-flex gap-2 mt-3">
+    <a asp-action="KeToaThuoc" 
+       asp-route-maKhamBenh="@ViewBag.MaKhamBenh"
+       class="btn btn-success px-4">
+        <i class="bi bi-file-medical"></i> Kê toa thuốc
+    </a>
+
+    <a asp-action="DanhSachXetNghiem" class="btn btn-secondary px-4">
+        ← Quay lại danh sách
+    </a>
+</div>

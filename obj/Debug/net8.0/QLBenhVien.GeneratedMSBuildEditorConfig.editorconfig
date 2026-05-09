@@ -34,8 +34,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUXVhbkx5UXV5ZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/ChiTietXetNghiem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFjU2lcQ2hpVGlldFhldE5naGllbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/ChonXetNghiem.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFjU2lcQ2hvblhldE5naGllbS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/DanhSachXetNghiem.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFjU2lcRGFuaFNhY2hYZXROZ2hpZW0uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/GoiBenhNhan.cshtml]
@@ -44,6 +52,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFjU2lcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/KeToaThuoc.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFjU2lcS2VUb2FUaHVvYy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/BMCSDL_DOAN/QLBenhVien/Views/BacSi/KhamBenh.cshtml]
@@ -72,6 +84,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [D:/BMCSDL_DOAN/QLBenhVien/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/BMCSDL_DOAN/QLBenhVien/Views/Shared/Components/DoctorSidebarMenu/Default.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXENvbXBvbmVudHNcRG9jdG9yU2lkZWJhck1lbnVcRGVmYXVsdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/BMCSDL_DOAN/QLBenhVien/Views/Shared/Error.cshtml]

@@ -12,7 +12,7 @@
         </div>
 
         <div class="card-body">
-            <!-- Thông tin cơ bản (giữ nguyên) -->
+            <!-- Thông tin cơ bản -->
             <div class="row g-3 mb-4">
                 <div class="col-md-3">
                     <label class="form-label fw-bold">Mã BN</label>
@@ -47,7 +47,7 @@
 
             @if (isMainRoom)
             {
-                <!-- Phòng PK01, PK02, PK03: Hiển thị đầy đủ -->
+                <!-- Phòng chính: Triệu chứng + Chẩn đoán -->
                 <div class="mb-4">
                     <label class="form-label fw-bold">Triệu chứng</label>
                     <textarea class="form-control" rows="5" placeholder="Nhập triệu chứng...">@Model.trieuChung</textarea>
@@ -57,8 +57,7 @@
                     <label class="form-label fw-bold">Chẩn đoán cuối cùng</label>
                     <textarea class="form-control" rows="5" placeholder="Nhập chẩn đoán cuối cùng...">@Model.chanDoanCuoiCung</textarea>
                 </div>
-
-                <!-- Nút chức năng cho phòng chính -->
+                <!-- Nút hành động -->
                 <div class="d-flex flex-wrap gap-2 mt-4">
                     <button class="btn btn-primary px-4">Khám bệnh</button>
                     <a asp-action="ChonXetNghiem" 
@@ -74,15 +73,24 @@
             }
             else
             {
-                <!-- Phòng khác: Chỉ hiện Ghi chú khám -->
-                <div class="mb-4">
-                    <label class="form-label fw-bold">Ghi chú khám</label>
-                    <textarea class="form-control" rows="6" placeholder="Nhập ghi chú khám...">@Model.ghiChuBacSiKham</textarea>
-                </div>
+                <form asp-action="CapNhatGhiChu" method="post" class="mb-4">
+                    <input type="hidden" name="id" value="@ViewBag.ID" />
+                    <input type="hidden" name="maPhongKham" value="@ViewBag.MaPhongKham" />
+
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Ghi chú khám</label>
+                        <textarea name="ghiChu" class="form-control" rows="6" 
+                                  placeholder="Nhập ghi chú khám..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-save"></i> Lưu ghi chú khám
+                    </button>
+                </form>
             }
         </div>
 
-        <!-- Nút dưới cùng (luôn hiển thị) -->
+        <!-- Nút dưới cùng -->
         <div class="card-footer d-flex justify-content-center gap-3 py-3">
             <button class="btn btn-success px-5">Xác nhận</button>
             <button class="btn btn-danger px-5">Hủy</button>

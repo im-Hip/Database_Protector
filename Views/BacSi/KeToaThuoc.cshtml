@@ -1,0 +1,86 @@
+@model ToaThuocViewModel
+
+@{
+    ViewData["Title"] = "Kê toa thuốc";
+}
+
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0"><i class="bi bi-file-medical me-2"></i> Kê toa thuốc</h4>
+    </div>
+    <div class="card-body">
+        <h5 class="mb-4">Bệnh nhân: <strong>@Model.TenBenhNhan</strong></h5>
+
+        <form asp-action="KeToaThuoc" method="post">
+            <input type="hidden" asp-for="MaKhamBenh" />
+
+            <div id="thuoc-list">
+                <!-- JavaScript sẽ thêm các dòng thuốc ở đây -->
+            </div>
+
+            <div class="mb-3">
+                <button type="button" onclick="themThuoc()" class="btn btn-outline-success">
+                    <i class="bi bi-plus-circle"></i> Thêm loại thuốc
+                </button>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="bi bi-save"></i> Lưu toa thuốc
+                </button>
+                <a asp-action="ChiTietXetNghiem" asp-route-maKhamBenh="@Model.MaKhamBenh" 
+                   class="btn btn-secondary px-4">
+                    Hủy
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        let index = 0;
+
+        function themThuoc() {
+            const html = `
+                <div class="card mb-3 p-3 border" id="thuoc-${index}">
+                    <div class="row g-2">
+                        <div class="col-md-4">
+                            <label class="form-label small">Tên thuốc</label>
+                            <input name="DanhSachThuoc[${index}].TenThuoc" class="form-control" placeholder="Ví dụ: Amoxicillin 500mg" required />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label small">Số lượng</label>
+                            <input name="DanhSachThuoc[${index}].SoLuong" type="number" class="form-control" placeholder="14" required />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Liều dùng</label>
+                            <input name="DanhSachThuoc[${index}].LieuDung" class="form-control" placeholder="2 viên/ngày" required />
+                        </div>
+                        <div class="col-md-3">
+                            <label class="form-label small">Ghi chú</label>
+                            <div class="input-group">
+                                <input name="DanhSachThuoc[${index}].GhiChu" class="form-control" placeholder="Uống sau ăn" />
+                                <button type="button" onclick="xoaThuoc(${index})" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.getElementById('thuoc-list').insertAdjacentHTML('beforeend', html);
+            index++;
+        }
+
+        function xoaThuoc(i) {
+            const element = document.getElementById('thuoc-' + i);
+            if (element) element.remove();
+        }
+
+        // Tự động thêm 1 dòng thuốc khi load trang
+        window.onload = function () {
+            themThuoc();
+        }
+    </script>
+}
