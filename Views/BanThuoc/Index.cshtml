@@ -1,0 +1,54 @@
+@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Danh sách toa thuốc";
+}
+
+<h3 class="mb-4"><i class="bi bi-clipboard-data me-2"></i> Danh sách toa thuốc</h3>
+
+<!-- FORM LỌC THEO NGÀY -->
+<form method="get" class="row g-3 mb-4">
+    <div class="col-md-3">
+        <label class="form-label">Từ ngày</label>
+        <input type="date" name="tuNgay" class="form-control" value="@Context.Request.Query["tuNgay"]" />
+    </div>
+    <div class="col-md-3">
+        <label class="form-label">Đến ngày</label>
+        <input type="date" name="denNgay" class="form-control" value="@Context.Request.Query["denNgay"]" />
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary me-2">Lọc</button>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Xóa lọc</a>
+    </div>
+</form>
+
+<!-- BẢNG DANH SÁCH -->
+<table class="table table-hover shadow-sm">
+    <thead class="table-light">
+        <tr>
+            <th>Mã toa</th>
+            <th>Ngày kê</th>
+            <th>Mã BN</th>
+            <th>Họ tên</th>
+            <th>Bác sĩ kê</th>
+            <th class="text-center">Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var toa in Model)
+        {
+            <tr>
+                <td><strong>@toa.maToaThuoc</strong></td>
+                <td>@toa.ngayKe.ToString("dd/MM/yyyy")</td>
+                <td>@toa.maBenhNhan</td>
+                <td>@toa.hoTen</td>
+                <td>@toa.TenBacSi</td>
+                <td class="text-center">
+                    <a asp-action="ChiTietToaThuoc" asp-route-maToaThuoc="@toa.maToaThuoc" 
+                       class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-eye"></i> Xem chi tiết
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -76,6 +76,7 @@ namespace QLBenhVien.Controllers
                 "2" => RedirectToAction("DanhSachBenhNhan", "DieuPhoi"),
                 "3" => RedirectToAction("DanhSachChoThuTien", "TaiVu"),      
                 "1" => RedirectToAction("Index", "BacSi"),
+                "6" => RedirectToAction("Index", "BanThuoc"),
                 _   => RedirectToAction("Index", "Home")
             };
         }

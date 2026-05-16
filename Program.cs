@@ -39,7 +39,10 @@ builder.Services.AddAuthorization(options =>
         policy.RequireClaim("TypeID", "3"));           
 
     options.AddPolicy("BacSiPolicy", policy =>
-        policy.RequireClaim("TypeID", "1"));          
+        policy.RequireClaim("TypeID", "1"));
+
+    options.AddPolicy("BanThuocPolicy", policy =>
+        policy.RequireClaim("TypeID", "6"));          
 });
 
 builder.Services.AddSession(options =>

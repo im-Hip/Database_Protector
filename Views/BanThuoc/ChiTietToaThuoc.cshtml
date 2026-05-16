@@ -1,0 +1,92 @@
+@model IEnumerable<dynamic>
+@{
+    ViewData["Title"] = "Chi tiết toa thuốc #" + ViewBag.MaToaThuoc;
+}
+
+<h3 class="mb-4">Chi tiết toa thuốc #<strong>@ViewBag.MaToaThuoc</strong></h3>
+
+<!-- TOA THUỐC CỦA BÁC SĨ (CHỈ XEM) -->
+<h5 class="mt-4">Toa thuốc của bác sĩ</h5>
+<table class="table table-bordered table-hover mb-4">
+    <thead class="table-light">
+        <tr>
+            <th>Tên thuốc</th>
+            <th>Số lượng</th>
+            <th>Liều dùng</th>
+            <th>Ghi chú</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ct in Model)
+        {
+            <tr>
+                <td>@ct.TenThuocGiaiMa</td>
+                <td>@ct.soLuong</td>
+                <td>@ct.lieuDung</td>
+                <td>@ct.GhiChuGiaiMa</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<h5>Thêm thuốc</h5>
+<form id="formBanThuoc" asp-action="TaoHoaDon" method="post">
+    <input type="hidden" name="maToaThuoc" value="@ViewBag.MaToaThuoc" />
+
+    <table class="table table-bordered table-hover" id="bangThuocBoSung">
+        <thead class="table-success">
+            <tr>
+                <th>Tên thuốc</th>
+                <th>Số lượng</th>
+                <th style="width: 80px;">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- JavaScript sẽ thêm dòng ở đây -->
+        </tbody>
+    </table>
+
+    <button type="button" onclick="themThuocBoSung()" class="btn btn-outline-success mb-3">
+        <i class="bi bi-plus-circle"></i> Thêm thuốc
+    </button>
+
+    <div class="d-flex gap-2 mt-3">
+        <button type="button" onclick="xacNhanThanhToan()" class="btn btn-success px-4">
+            <i class="bi bi-check-circle"></i> Xác nhận & Thanh toán
+        </button>
+
+        <a asp-action="Index" class="btn btn-secondary px-4">
+            ← Quay lại danh sách
+        </a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        let index = 0;
+
+        function themThuocBoSung() {
+            const tbody = document.querySelector('#bangThuocBoSung tbody');
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><input type="text" name="DanhSachBoSung[${index}].TenThuoc" class="form-control" placeholder="Nhập tên thuốc" required></td>
+                <td><input type="number" name="DanhSachBoSung[${index}].SoLuong" class="form-control" value="1" min="1" required></td>
+                <td><button type="button" class="btn btn-danger btn-sm" onclick="xoaDong(this)">Xóa</button></td>
+            `;
+            tbody.appendChild(row);
+            index++;
+        }
+
+        function xoaDong(btn) {
+            btn.closest('tr').remove();
+        }
+
+        function xacNhanThanhToan() {
+            if (confirm('Bạn có chắc chắn muốn bán những thuốc này không?')) {
+                document.getElementById('formBanThuoc').submit();
+            }
+        }
+    </script>
+}
