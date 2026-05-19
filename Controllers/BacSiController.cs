@@ -317,7 +317,7 @@ namespace QLBenhVien.Controllers
             }, commandType: CommandType.StoredProcedure);
 
             TempData["Success"] = "Đã cập nhật triệu chứng, chẩn đoán và ngày tái khám thành công!";
-            return RedirectToAction("DanhSachXetNghiem");
+            return RedirectToAction("Index");
         }
     }
 }   

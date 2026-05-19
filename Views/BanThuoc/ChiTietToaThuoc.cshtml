@@ -30,30 +30,30 @@
 </table>
 
 
-<h5>Thêm thuốc</h5>
+<h5>Bán thuốc theo toa</h5>
+
 <form id="formBanThuoc" asp-action="TaoHoaDon" method="post">
-    <input type="hidden" name="maToaThuoc" value="@ViewBag.MaToaThuoc" />
+    <input type="hidden" name="MaToaThuoc" value="@ViewBag.MaToaThuoc" />
 
     <table class="table table-bordered table-hover" id="bangThuocBoSung">
         <thead class="table-success">
             <tr>
                 <th>Tên thuốc</th>
-                <th>Số lượng</th>
+                <th>Số lượng bán</th>
                 <th style="width: 80px;">Thao tác</th>
             </tr>
         </thead>
         <tbody>
-            <!-- JavaScript sẽ thêm dòng ở đây -->
         </tbody>
     </table>
 
     <button type="button" onclick="themThuocBoSung()" class="btn btn-outline-success mb-3">
-        <i class="bi bi-plus-circle"></i> Thêm thuốc
+        <i class="bi bi-plus-circle"></i> Thêm thuốc bán
     </button>
 
     <div class="d-flex gap-2 mt-3">
         <button type="button" onclick="xacNhanThanhToan()" class="btn btn-success px-4">
-            <i class="bi bi-check-circle"></i> Xác nhận & Thanh toán
+            <i class="bi bi-check-circle"></i> Xác nhận & Tạo hóa đơn
         </button>
 
         <a asp-action="Index" class="btn btn-secondary px-4">
@@ -70,11 +70,36 @@
             const tbody = document.querySelector('#bangThuocBoSung tbody');
 
             const row = document.createElement('tr');
+
             row.innerHTML = `
-                <td><input type="text" name="DanhSachBoSung[${index}].TenThuoc" class="form-control" placeholder="Nhập tên thuốc" required></td>
-                <td><input type="number" name="DanhSachBoSung[${index}].SoLuong" class="form-control" value="1" min="1" required></td>
-                <td><button type="button" class="btn btn-danger btn-sm" onclick="xoaDong(this)">Xóa</button></td>
+                <td>
+                    <select name="DanhSachBoSung[${index}].MaThuoc" class="form-control" required>
+                        <option value="">-- Chọn thuốc --</option>
+                        @foreach (var t in ViewBag.DanhSachThuoc)
+                        {
+                            <option value="@t.maThuoc">
+                                @t.tenThuoc - Tồn: @t.soLuongTon
+                            </option>
+                        }
+                    </select>
+                </td>
+
+                <td>
+                    <input type="number"
+                           name="DanhSachBoSung[${index}].SoLuong"
+                           class="form-control"
+                           value="1"
+                           min="1"
+                           required>
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="xoaDong(this)">
+                        Xóa
+                    </button>
+                </td>
             `;
+
             tbody.appendChild(row);
             index++;
         }
@@ -84,7 +109,7 @@
         }
 
         function xacNhanThanhToan() {
-            if (confirm('Bạn có chắc chắn muốn bán những thuốc này không?')) {
+            if (confirm('Bạn có chắc chắn muốn tạo hóa đơn thuốc không?')) {
                 document.getElementById('formBanThuoc').submit();
             }
         }

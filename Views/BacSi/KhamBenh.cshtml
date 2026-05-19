@@ -48,26 +48,48 @@
             @if (isMainRoom)
             {
                 <!-- Phòng chính: Triệu chứng + Chẩn đoán -->
-                <div class="mb-4">
-                    <label class="form-label fw-bold">Triệu chứng</label>
-                    <textarea class="form-control" rows="5" placeholder="Nhập triệu chứng...">@Model.trieuChung</textarea>
-                </div>
+                <form asp-action="CapNhatChanDoan" method="post">
 
-                <div class="mb-4">
-                    <label class="form-label fw-bold">Chẩn đoán cuối cùng</label>
-                    <textarea class="form-control" rows="5" placeholder="Nhập chẩn đoán cuối cùng...">@Model.chanDoanCuoiCung</textarea>
-                </div>
-                <!-- Nút hành động -->
-                <div class="d-flex flex-wrap gap-2 mt-4">
-                    <a asp-action="ChonXetNghiem" 
-                       asp-route-maKhamBenh="@Model.maKhamBenh"
-                       asp-route-maBenhNhan="@Model.maBenhNhan"
-                        asp-route-maPhongKham="@ViewBag.MaPhongKham"
-                       class="btn btn-warning px-4">
-                        Cho đi xét nghiệm
-                    </a>
-                    <button class="btn btn-success px-4">Kê toa thuốc</button>
-                </div>
+                    <input type="hidden" name="maKhamBenh" value="@Model.maKhamBenh" />
+                    <input type="hidden" name="maPhongKham" value="@ViewBag.MaPhongKham" />
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Triệu chứng</label>
+                        <textarea name="trieuChung"
+                                  class="form-control"
+                                  rows="5">@Model.trieuChung</textarea>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">Chẩn đoán cuối cùng</label>
+                        <textarea name="chanDoanCuoiCung"
+                                  class="form-control"
+                                  rows="5">@Model.chanDoanCuoiCung</textarea>
+                    </div>
+
+                    <div class="d-flex flex-wrap gap-2 mt-4">
+
+                        <a asp-action="ChonXetNghiem"
+                           asp-route-maKhamBenh="@Model.maKhamBenh"
+                           asp-route-maBenhNhan="@Model.maBenhNhan"
+                           asp-route-maPhongKham="@ViewBag.MaPhongKham"
+                           class="btn btn-warning px-4">
+                            Cho đi xét nghiệm
+                        </a>
+
+                        <button type="submit" class="btn btn-primary px-4">
+                            Lưu chẩn đoán
+                        </button>
+
+                        <a asp-action="KeToaThuoc"
+                           asp-route-maKhamBenh="@Model.maKhamBenh"
+                           class="btn btn-success px-4">
+                            Kê toa thuốc
+                        </a>
+
+                    </div>
+
+                </form>
             }
             else
             {
@@ -86,12 +108,6 @@
                     </button>
                 </form>
             }
-        </div>
-
-        <!-- Nút dưới cùng -->
-        <div class="card-footer d-flex justify-content-center gap-3 py-3">
-            <button class="btn btn-success px-5">Xác nhận</button>
-            <button class="btn btn-danger px-5">Hủy</button>
         </div>
     </div>
 </div>
